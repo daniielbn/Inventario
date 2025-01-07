@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.categoria.ListarCategoriasController">
+    <children>
+        <MenuBar layoutY="2.0" styleClass="menu-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu id="opcionAccesibilidad" mnemonicParsing="false" styleClass="menu-item" text="Accesibilidad">
+                    <items>
+                        <MenuItem fx:id="menuItemAccesibilidad" mnemonicParsing="false" onAction="#abrirAccesibilidad" text="Abrir Accesibilidad..." />
+                    </items>
+                </Menu>
+                <Menu id="opcionAyuda" mnemonicParsing="false" styleClass="menu-item" text="Ayuda">
+                    <items>
+                        <MenuItem fx:id="menuItemAyuda" mnemonicParsing="false" onAction="#abrirAyuda" text="Abrir Ayuda..." />
+                    </items>
+                </Menu>
+                <Menu id="salir" mnemonicParsing="false" styleClass="menu-item" text="Volver">
+                    <items>
+                        <MenuItem fx:id="menuItemSalir" mnemonicParsing="false" onAction="#volver" text="Volver..." />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Label alignment="CENTER" layoutX="188.0" layoutY="78.0" styleClass="bold" text="HAS ELEGIDO LA OPCIÓN DE LISTAR LAS CATEGORÍAS" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tablaCategorias" layoutX="250.0" layoutY="216.0" prefHeight="390.0" prefWidth="800.0">
+            <columns>
+                <TableColumn fx:id="colIdCategoria" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="colNombre" prefWidth="241.6" text="Nombre" />
+                <TableColumn fx:id="colDescripcion" prefWidth="241.6" text="Descripción" />
+                <TableColumn fx:id="colEstado" prefWidth="241.6" text="Estado" />
+            </columns>
+        </TableView>
+        <Label layoutX="283.0" layoutY="162.0" text="FILTROS" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtNombre" layoutX="438.0" layoutY="156.0" prefHeight="39.0" prefWidth="124.0" promptText="Nombre" style="-fx-background-radius: 5;">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="txtDescripcion" layoutX="694.0" layoutY="156.0" prefHeight="39.0" prefWidth="124.0" promptText="Descripción" style="-fx-background-radius: 5;">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </TextField>
+        <AnchorPane layoutX="919.0" layoutY="157.0" prefHeight="27.0" prefWidth="111.0">
+            <fx:include fx:id="buttonLimpiar" source="../buttonLimpiar.fxml" />
+        </AnchorPane>
+    </children>
+</AnchorPane>

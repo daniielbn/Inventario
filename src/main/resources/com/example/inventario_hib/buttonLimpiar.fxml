@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Button fx:id="buttonLimpiar" mnemonicParsing="false" onAction="#limpiar" prefHeight="27.0" prefWidth="111.0" style="-fx-background-radius: 20;" stylesheets="@../../../styles/buttonHover.css" text="Limpiar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ButtonLimpiarController">
+   <font>
+      <Font name="System Bold Italic" size="18.0" />
+   </font>
+</Button>

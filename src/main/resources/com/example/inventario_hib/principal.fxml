@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" stylesheets="@../../../styles/buttonHover.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.PrincipalController">
+   <children>
+      <Label alignment="CENTER" layoutX="40.0" layoutY="50.0" styleClass="bold" text="BIENVENIDO AL SISTEMA DE GESTIÓN DE PRODUCTOS MEDIANTE RFID" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="423.0" layoutY="129.0" prefHeight="25.0" prefWidth="437.0" text="Por favor, indique el módulo a gestionar:" textFill="WHITE" AnchorPane.leftAnchor="423.0" AnchorPane.rightAnchor="440.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <MenuBar layoutY="2.0" styleClass="menu-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu id="opcionAccesibilidad" mnemonicParsing="false" styleClass="menu-item" text="Accesibilidad">
+               <items>
+                  <MenuItem fx:id="menuItemAccesibilidad" mnemonicParsing="false" onAction="#abrirAccesibilidad" text="Abrir Accesibilidad..." />
+               </items></Menu>
+          <Menu id="opcionAyuda" mnemonicParsing="false" styleClass="menu-item" text="Ayuda">
+               <items>
+                  <MenuItem fx:id="menuItemAyuda" mnemonicParsing="false" onAction="#abrirAyuda" text="Abrir Ayuda..." />
+               </items></Menu>
+            <Menu id="salir" mnemonicParsing="false" styleClass="menu-item" text="Salir">
+               <items>
+                  <MenuItem fx:id="menuItemSalir" mnemonicParsing="false" onAction="#salir" text="Salir..." />
+               </items></Menu>
+        </menus>
+      </MenuBar>
+      <Label layoutX="423.0" layoutY="421.0" prefHeight="25.0" prefWidth="437.0" text="O, si lo desea, puede consultar los datos:" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="267.0" layoutY="214.0" onMouseClicked="#abrirAulas" pickOnBounds="true" preserveRatio="true" styleClass="button">
+         <image>
+            <Image url="@../../../img/classroom.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="513.0" layoutY="214.0" onMouseClicked="#abrirProductos" pickOnBounds="true" preserveRatio="true" styleClass="btn">
+         <image>
+            <Image url="@../../../img/product.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="820.0" layoutY="214.0" onMouseClicked="#abrirCategorias" pickOnBounds="true" preserveRatio="true" styleClass="btn">
+         <image>
+            <Image url="@../../../img/category.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="287.0" layoutY="304.0" onMouseClicked="#abrirMarcajes" pickOnBounds="true" preserveRatio="true" styleClass="btn">
+         <image>
+            <Image url="@../../../img/barcode.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="577.0" layoutY="304.0" onMouseClicked="#abrirProductoCategoria" pickOnBounds="true" preserveRatio="true" styleClass="btn">
+         <image>
+            <Image url="@../../../img/list.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="342.0" layoutY="226.0" onMouseClicked="#abrirAulas" styleClass="btn" text="AULAS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="598.0" layoutY="226.0" onMouseClicked="#abrirProductos" styleClass="btn" text="PRODUCTOS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="896.0" layoutY="226.0" onMouseClicked="#abrirCategorias" styleClass="btn" text="CATEGORÍAS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="373.0" layoutY="316.0" onMouseClicked="#abrirMarcajes" styleClass="btn" text="MARCAJES" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="653.0" layoutY="316.0" onMouseClicked="#abrirProductoCategoria" styleClass="btn" text="PRODUCTOS POR CATEGORÍA" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="52.0" layoutY="506.0" onMouseClicked="#abirConsulta1" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/one.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="524.0" layoutY="504.0" onMouseClicked="#abirConsulta2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/two.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="896.0" layoutY="504.0" onMouseClicked="#abirConsulta3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/three.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="299.0" layoutY="638.0" onMouseClicked="#abirConsulta4" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="250.0">
+         <image>
+            <Image url="@../../../img/four.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="651.0" layoutY="638.0" onMouseClicked="#abirConsulta5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/five.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="127.0" layoutY="501.0" onMouseClicked="#abirConsulta1" prefHeight="71.0" prefWidth="363.0" text="MARCAJES DE UN PRODUCTO ENTRE DOS FECHAS" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="616.0" layoutY="494.0" onMouseClicked="#abirConsulta2" prefHeight="88.0" prefWidth="239.0" text="MARCAJES DE AULA ENTRE DOS FECHAS" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="975.0" layoutY="482.0" onMouseClicked="#abirConsulta3" prefHeight="111.0" prefWidth="276.0" text="MARCAJES DE UN AULA Y DE UN PRODUCTO" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="328.0" layoutY="635.0" onMouseClicked="#abirConsulta4" prefHeight="71.0" prefWidth="208.0" text="PRODUCTOS SIN CATEGORÍA" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="735.0" layoutY="635.0" onMouseClicked="#abirConsulta5" prefHeight="71.0" prefWidth="298.0" text="NÚMERO DE PRODUCTOS POR CATEGORÍA" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.rightAnchor="267.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
