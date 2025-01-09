@@ -71,7 +71,7 @@ public class PrincipalController {
     public void abrirProductoCategoria(MouseEvent mouseEvent) {
         try {
             App.setDirectory(5);
-            App.setRoot("productoCategoria", "Sistema de gestión de la relación entre Producto-Categoría.");
+            App.setRoot("prodCat", "Sistema de gestión de la relación entre Producto-Categoría.");
         } catch (Exception e) {
             e.printStackTrace();
         }
