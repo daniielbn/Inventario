@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.prodCat.ProdCatController">
+    <children>
+        <MenuBar layoutY="2.0" styleClass="menu-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu id="opcionAccesibilidad" mnemonicParsing="false" onAction="#abrirAccesibilidad" styleClass="menu-item" text="Accesibilidad">
+                    <items>
+                        <MenuItem fx:id="menuItemAccesibilidad" mnemonicParsing="false" onAction="#abrirAccesibilidad" text="Abrir Accesibilidad..." />
+                    </items></Menu>
+                <Menu id="opcionAyuda" mnemonicParsing="false" styleClass="menu-item" text="Ayuda">
+                    <items>
+                        <MenuItem fx:id="menuItemAyuda" mnemonicParsing="false" onAction="#abrirAyuda" text="Abrir Ayuda..." />
+                    </items></Menu>
+                <Menu id="salir" mnemonicParsing="false" styleClass="menu-item" text="Volver">
+                    <items>
+                        <MenuItem fx:id="menuItemVolver" mnemonicParsing="false" onAction="#volver" text="Volver..." />
+                    </items></Menu>
+            </menus>
+        </MenuBar>
+        <Label alignment="CENTER" layoutX="178.0" layoutY="40.0" prefHeight="109.0" prefWidth="945.0" styleClass="bold" text="HAS ELEGIDO LA OPCIÓN DE PRODUCTOS POR CATEGORÍA" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="178.0" AnchorPane.rightAnchor="177.0">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtIdProducto" layoutX="681.0" layoutY="261.0" prefHeight="39.0" prefWidth="250.0" promptText="Id de Producto" style="-fx-background-radius: 5;">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </TextField>
+        <AnchorPane layoutX="1003.0" layoutY="261.0" prefHeight="27.0" prefWidth="111.0">
+            <children>
+                <fx:include fx:id="buttonLimpiar" source="../buttonLimpiar.fxml" />
+            </children>
+        </AnchorPane>
+        <TextField fx:id="txtIdCategoria" layoutX="326.0" layoutY="261.0" prefHeight="39.0" prefWidth="250.0" promptText="Id de Categoría" style="-fx-background-radius: 5;">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </TextField>
+        <Label layoutX="206.0" layoutY="267.0" text="FILTROS" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tablaProductoCategoria" layoutX="50.0" layoutY="323.0" prefHeight="436.0" prefWidth="1210.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+            <columns>
+                <TableColumn fx:id="colId" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="colIdCategoria" prefWidth="567.5" text="Categoría" />
+                <TableColumn fx:id="colIdProducto" prefWidth="555.0" text="Producto" />
+            </columns>
+        </TableView>
+        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="162.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../../img/filter.png" />
+            </image>
+        </ImageView>
+        <HBox alignment="CENTER" layoutX="25.0" layoutY="126.0" prefHeight="135.0" prefWidth="1300.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+            <children>
+                <HBox alignment="CENTER" onMouseClicked="#crearProductoCategoria" prefHeight="115.0">
+                    <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../img/create.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="15.0" right="15.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <Label text="Añadir producto a una categoría" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold Italic" size="20.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets right="15.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <HBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                    </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="crear" />
+               </styleClass>
+                </HBox>
+                <HBox alignment="CENTER" onMouseClicked="#modificarProductoCategoria" prefHeight="100.0">
+                    <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../img/update.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="15.0" right="15.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <Label text="Modificar productos" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold Italic" size="20.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets right="15.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <HBox.margin>
+                        <Insets bottom="20.0" left="25.0" right="200.0" top="20.0" />
+                    </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="modificar" />
+               </styleClass>
+                </HBox>
+                <HBox alignment="CENTER" onMouseClicked="#eliminarProductoCategoria" prefHeight="100.0">
+                    <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../img/delete.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="15.0" right="15.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <Label text="Eliminar productos" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold Italic" size="20.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets right="15.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <HBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                    </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="eliminar" />
+               </styleClass>
+                </HBox>
+            </children>
+        </HBox>
+    </children>
+   <stylesheets>
+      <URL value="@../../../../styles/styles.css" />
+      <URL value="@../../../../styles/table.css" />
+   </stylesheets>
+</AnchorPane>
