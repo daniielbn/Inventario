@@ -68,36 +68,57 @@ public class PrincipalController {
         System.exit(0);
     }
 
-    public void abrirConsulta1(MouseEvent mouseEvent) {
-    }
-
-    public void abrirConsulta2(MouseEvent mouseEvent) {
-    }
-
-    public void abrirConsulta3(MouseEvent mouseEvent) {
-    }
-
-    public void abrirConsulta4(MouseEvent mouseEvent) {
-    }
-
-    public void abrirConsulta5(MouseEvent mouseEvent) {
-    }
-
     public void abrirProductoCategoria(MouseEvent mouseEvent) {
+        try {
+            App.setDirectory(5);
+            App.setRoot("productoCategoria", "Sistema de gestión de la relación entre Producto-Categoría.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void abirConsulta1(MouseEvent mouseEvent) {
+        try {
+            App.setDirectory(6);
+            App.setRoot("uno", "Sistema de gestión de productos mediante RFID - Marcajes de un Producto entre dos fechas.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void abirConsulta2(MouseEvent mouseEvent) {
+        try {
+            App.setDirectory(6);
+            App.setRoot("dos", "Sistema de gestión de productos mediante RFID - Marcajes de un Aula entre dos fechas.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void abirConsulta3(MouseEvent mouseEvent) {
+        try {
+            App.setDirectory(6);
+            App.setRoot("tres", "Sistema de gestión de productos mediante RFID - Marcajes de un Aula y de un Producto.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void abirConsulta4(MouseEvent mouseEvent) {
+        try {
+            App.setDirectory(6);
+            App.setRoot("cuatro", "Sistema de gestión de productos mediante RFID - Productos sin categoría.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void abirConsulta5(MouseEvent mouseEvent) {
+        try {
+            App.setDirectory(6);
+            App.setRoot("cinco", "Sistema de gestión de productos mediante RFID - Número de productos por categoría.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

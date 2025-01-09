@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.marcaje.MarcajesController">
+<AnchorPane fx:id="raiz" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.marcaje.MarcajesController">
     <children>
         <MenuBar layoutY="2.0" styleClass="menu-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
@@ -25,55 +28,135 @@
                     </items></Menu>
             </menus>
         </MenuBar>
-        <Label alignment="CENTER" layoutX="178.0" layoutY="68.0" prefHeight="53.0" prefWidth="945.0" styleClass="bold" text="HAS ELEGIDO LA OPCIÓN DE GESTIÓN DE MARCAJES" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="178.0" AnchorPane.rightAnchor="177.0">
+        <Label alignment="CENTER" layoutX="178.0" layoutY="49.0" prefHeight="53.0" prefWidth="945.0" styleClass="bold" text="HAS ELEGIDO LA OPCIÓN DE GESTIÓN DE MARCAJES" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="178.0" AnchorPane.rightAnchor="177.0">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>
         </Label>
-        <Label layoutX="407.0" layoutY="150.0" prefHeight="35.0" prefWidth="486.0" text="Por favor, indique la acción que desea realizar" textFill="WHITE" AnchorPane.leftAnchor="407.0" AnchorPane.rightAnchor="407.0">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonCrearMarcaje" layoutX="177.0" layoutY="339.0" mnemonicParsing="false" onAction="#crearMarcaje" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ir al formulario">
-            <font>
-                <Font name="System Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="183.0" layoutY="277.0" text="CREAR NUEVO MARCAJE" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonListarMarcajes" layoutX="171.0" layoutY="534.0" mnemonicParsing="false" onAction="#listarMarcajes" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ver la tabla">
-            <font>
-                <Font name="System Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="151.0" layoutY="470.0" text="LISTAR TODOS LOS MARCAJES" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonModificarMarcaje" layoutX="850.0" layoutY="339.0" mnemonicParsing="false" onAction="#modificarMarcaje" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ir a formulario">
-            <font>
-                <Font name="System Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="851.0" layoutY="277.0" text="MODIFICAR UN MARCAJE" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonEliminarMarcaje" layoutX="851.0" layoutY="534.0" mnemonicParsing="false" onAction="#eliminarMarcaje" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ver tabla">
-            <font>
-                <Font name="System Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="862.0" layoutY="470.0" text="ELIMINAR UN MARCAJE" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
+      <TableView fx:id="tablaMarcajes" layoutX="76.0" layoutY="333.0" prefHeight="436.0" prefWidth="1210.0" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+         <columns>
+            <TableColumn fx:id="colIdMarcaje" prefWidth="75.0" text="Id" />
+            <TableColumn fx:id="colIdAula" prefWidth="283.75" text="Aula" />
+            <TableColumn fx:id="colIdProducto" prefWidth="283.75" text="Producto" />
+            <TableColumn fx:id="colFecha" prefWidth="283.75" text="Fecha" />
+            <TableColumn fx:id="colTipo" prefWidth="270.0" text="Tipo" />
+         </columns>
+      </TableView>
+      <DatePicker fx:id="dateFinal" layoutX="760.0" layoutY="263.0" />
+      <Label layoutX="650.0" layoutY="262.0" text="Fecha final" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="317.0" layoutY="262.0" text="Fecha inicial" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dateInicio" layoutX="434.0" layoutY="263.0" />
+      <AnchorPane layoutX="988.0" layoutY="250.0">
+         <children>
+            <fx:include fx:id="buttonLimpiar" source="../buttonLimpiar.fxml" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="192.0" layoutY="263.0" text="FILTROS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="146.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../img/filter.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER" layoutX="62.0" layoutY="126.0" prefHeight="135.0" prefWidth="1300.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+         <children>
+            <HBox alignment="CENTER" onMouseClicked="#crearMarcaje" prefHeight="115.0">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../img/create.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="Crear marcaje" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="crear" />
+               </styleClass>
+            </HBox>
+            <HBox alignment="CENTER" onMouseClicked="#modificarMarcaje" prefHeight="100.0">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../img/update.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="Modificar marcaje" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="25.0" right="400.0" top="20.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="modificar" />
+               </styleClass>
+            </HBox>
+            <HBox alignment="CENTER" onMouseClicked="#eliminarMarcaje" prefHeight="100.0">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../img/delete.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="Eliminar marcaje" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="eliminar" />
+               </styleClass>
+            </HBox>
+         </children>
+      </HBox>
     </children>
+   <stylesheets>
+      <URL value="@../../../../styles/styles.css" />
+      <URL value="@../../../../styles/table.css" />
+   </stylesheets>
 </AnchorPane>

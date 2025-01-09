@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Button fx:id="buttonLimpiar" mnemonicParsing="false" onAction="#limpiar" prefHeight="27.0" prefWidth="111.0" style="-fx-background-radius: 20;" stylesheets="@../../../styles/buttonHover.css" text="Limpiar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ButtonLimpiarController">
+<Button fx:id="buttonLimpiar" mnemonicParsing="false" onAction="#limpiar" prefHeight="27.0" prefWidth="111.0" style="-fx-background-radius: 20;" styleClass="btn" stylesheets="@../../../styles/styles.css" text="Limpiar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.ButtonLimpiarController">
    <font>
       <Font name="System Bold Italic" size="18.0" />
    </font>

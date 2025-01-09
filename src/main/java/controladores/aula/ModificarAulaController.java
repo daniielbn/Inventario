@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modelo.Aula;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +15,6 @@ import java.util.List;
 public class ModificarAulaController {
     private final AulaDAO aulaDAO = new AulaDAO();
     private Aula aulaSeleccionada;
-    @FXML
-    private ComboBox<Long> cbIdAula;
 
     @FXML
     private Spinner<Integer> spinnerNum1;
@@ -38,27 +35,12 @@ public class ModificarAulaController {
     @FXML
     private Spinner<Integer> spinnerIp4;
 
-    @FXML
-    private TableView<Aula> tablaAulas;
-    @FXML
-    private TableColumn<Aula, Long> colIdAula;
-    @FXML
-    private TableColumn<Aula, String> colNumeracion;
-    @FXML
-    private TableColumn<Aula, String> colDescripcion;
-    @FXML
-    private TableColumn<Aula, String> colIp;
-
     @FXML // Importamos el botón de limpiar
     private Button buttonLimpiar;
 
     @FXML
     public void initialize() {
-        colIdAula.setCellValueFactory(new PropertyValueFactory<>("idAula"));
-        colNumeracion.setCellValueFactory(new PropertyValueFactory<>("numeracion"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        colIp.setCellValueFactory(new PropertyValueFactory<>("direccionIp"));
-        cargarAulas();
+        aulaSeleccionada = (Aula) App.getUserData();
 
         spinnerIp1.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 255, 0));
         spinnerIp2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 255, 0));
@@ -69,41 +51,11 @@ public class ModificarAulaController {
         spinnerNum2.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0));
         spinnerNum3.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 25, 0));
 
-        tablaAulas.getSelectionModel().selectedItemProperty().addListener((ChangeListener<Aula>) (observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                aulaSeleccionada = newValue;
-                cbIdAula.setValue(aulaSeleccionada.getIdAula());
-                txtDescripcion.setText(aulaSeleccionada.getDescripcion());
-                String[] ip = aulaSeleccionada.getDireccionIp().split("\\.");
-                establecerSpinnerIp(ip);
-                String[] numeracion = aulaSeleccionada.getNumeracion().split("\\.");
-                establecerSpinnerNumeracion(numeracion);
-            }
-        });
-
-        cbIdAula.getItems().setAll(obtenerIdAulas());
-
-        cbIdAula.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                aulaSeleccionada = aulaDAO.obtenerPorId(newValue);
-                tablaAulas.getSelectionModel().select(aulaSeleccionada);
-                txtDescripcion.setText(aulaSeleccionada.getDescripcion());
-                String[] ip = aulaSeleccionada.getDireccionIp().split("\\.");
-                establecerSpinnerIp(ip);
-                String[] numeracion = aulaSeleccionada.getNumeracion().split("\\.");
-                establecerSpinnerNumeracion(numeracion);
-            }
-        });
+        limpiar();
 
         buttonLimpiar.setOnAction(event -> {
-            limpiar(event);
+            limpiar();
         });
-    }
-
-    private void cargarAulas() {
-        List<Aula> aulas = aulaDAO.getTodos();
-        tablaAulas.getItems().clear();
-        tablaAulas.getItems().setAll(aulas);
     }
 
     public void abrirAccesibilidad(ActionEvent actionEvent) {
@@ -140,18 +92,19 @@ public class ModificarAulaController {
         }
     }
 
-    public void limpiar(ActionEvent actionEvent) {
-        aulaSeleccionada = null;
-        cbIdAula.setValue(null);
-        txtDescripcion.clear();
-        spinnerIp1.getValueFactory().setValue(0);
-        spinnerIp2.getValueFactory().setValue(0);
-        spinnerIp3.getValueFactory().setValue(0);
-        spinnerIp4.getValueFactory().setValue(0);
-        spinnerNum1.getValueFactory().setValue(0);
-        spinnerNum2.getValueFactory().setValue(0);
-        spinnerNum3.getValueFactory().setValue(0);
-        tablaAulas.getSelectionModel().clearSelection();
+    private void limpiar() {
+        txtDescripcion.setText(aulaSeleccionada.getDescripcion());
+
+        String[] ip = aulaSeleccionada.getDireccionIp().split("\\.");
+        spinnerIp1.getValueFactory().setValue(Integer.parseInt(ip[0]));
+        spinnerIp2.getValueFactory().setValue(Integer.parseInt(ip[1]));
+        spinnerIp3.getValueFactory().setValue(Integer.parseInt(ip[2]));
+        spinnerIp4.getValueFactory().setValue(Integer.parseInt(ip[3]));
+
+        String[] numeracion = aulaSeleccionada.getNumeracion().split("\\.");
+        spinnerNum1.getValueFactory().setValue(Integer.parseInt(numeracion[0]));
+        spinnerNum2.getValueFactory().setValue(Integer.parseInt(numeracion[1]));
+        spinnerNum3.getValueFactory().setValue(Integer.parseInt(numeracion[2]));
     }
 
     public void modificar(ActionEvent actionEvent) {
@@ -167,7 +120,6 @@ public class ModificarAulaController {
                         "\nDirección IP: " + getDireccionIp() +
                         "\nNumeración: " + spinnerNum1.getValue() + "." + spinnerNum2.getValue() + "." + spinnerNum3.getValue());
                 alert.showAndWait();
-                cargarAulas();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Modificar Aula");
@@ -190,8 +142,9 @@ public class ModificarAulaController {
     }
 
     private List<Long> obtenerIdAulas() {
+        List<Aula> aulas = aulaDAO.getTodos();
         List<Long> ids = new ArrayList<>();
-        for (Aula aula : tablaAulas.getItems()) {
+        for (Aula aula : aulas) {
             ids.add(aula.getIdAula());
         }
         return ids;

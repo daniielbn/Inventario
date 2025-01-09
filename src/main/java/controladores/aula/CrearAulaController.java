@@ -5,6 +5,7 @@ import com.example.inventario_hib.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import modelo.Aula;
 
 public class CrearAulaController {
@@ -24,7 +25,7 @@ public class CrearAulaController {
     @FXML
     private Spinner<Integer> spinnerNumeracion2;
     @FXML
-    private Spinner<Integer> spinnerNumeracion3;
+        private Spinner<Integer> spinnerNumeracion3;
 
     @FXML // Importamos el botón de limpiar
     private Button buttonLimpiar;
@@ -81,31 +82,7 @@ public class CrearAulaController {
         }
     }
 
-    public void crear(ActionEvent actionEvent) {
-        if (comprobarCampos()) {
-            AulaDAO aulaDAO = new AulaDAO();
-            String descripcion = txtDescripcion.getText();
-            String ip = spinnerIp1.getValue() + "." + spinnerIp2.getValue() + "." + spinnerIp3.getValue() + "." + spinnerIp4.getValue();
-            String numeracion = spinnerNumeracion1.getValue() + "." + spinnerNumeracion2.getValue() + "." + spinnerNumeracion3.getValue();
-            Aula aula = new Aula(numeracion, descripcion, ip);
-            if (aulaDAO.create(aula)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Aula creada");
-                alert.setHeaderText("Aula creada correctamente.");
-                alert.setContentText("Descripción: " + txtDescripcion.getText() +
-                        "\nDirección IP: " + spinnerIp1.getValue() + "." + spinnerIp2.getValue() + "." + spinnerIp3.getValue() + "." + spinnerIp4.getValue() +
-                        "\nNumeración: " + spinnerNumeracion1.getValue() + "." + spinnerNumeracion2.getValue() + "." + spinnerNumeracion3.getValue());
-                alert.showAndWait();
-                limpiar(null);
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error al crear el Aula");
-                alert.setHeaderText("Error al crear el Aula.");
-                alert.setContentText("No se ha podido crear el aula. Por favor, inténtelo de nuevo.");
-                alert.showAndWait();
-            }
-        }
-    }
+
 
     private boolean comprobarCampos() {
         if (comprobarDescripcion() && comprobarIp() && comprobarNumeracion()) {
@@ -154,5 +131,31 @@ public class CrearAulaController {
         spinnerNumeracion1.getValueFactory().setValue(0);
         spinnerNumeracion2.getValueFactory().setValue(0);
         spinnerNumeracion3.getValueFactory().setValue(0);
+    }
+
+    public void crear(ActionEvent actionEvent) {
+        if (comprobarCampos()) {
+            AulaDAO aulaDAO = new AulaDAO();
+            String descripcion = txtDescripcion.getText();
+            String ip = spinnerIp1.getValue() + "." + spinnerIp2.getValue() + "." + spinnerIp3.getValue() + "." + spinnerIp4.getValue();
+            String numeracion = spinnerNumeracion1.getValue() + "." + spinnerNumeracion2.getValue() + "." + spinnerNumeracion3.getValue();
+            Aula aula = new Aula(numeracion, descripcion, ip);
+            if (aulaDAO.create(aula)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Aula creada");
+                alert.setHeaderText("Aula creada correctamente.");
+                alert.setContentText("Descripción: " + txtDescripcion.getText() +
+                        "\nDirección IP: " + spinnerIp1.getValue() + "." + spinnerIp2.getValue() + "." + spinnerIp3.getValue() + "." + spinnerIp4.getValue() +
+                        "\nNumeración: " + spinnerNumeracion1.getValue() + "." + spinnerNumeracion2.getValue() + "." + spinnerNumeracion3.getValue());
+                alert.showAndWait();
+                limpiar(null);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error al crear el Aula");
+                alert.setHeaderText("Error al crear el Aula.");
+                alert.setContentText("No se ha podido crear el aula. Por favor, inténtelo de nuevo.");
+                alert.showAndWait();
+            }
+        }
     }
 }

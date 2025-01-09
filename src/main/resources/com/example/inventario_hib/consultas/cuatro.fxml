@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" styleClass="pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.consultas.ConsultaCuatroController">
+    <children>
+        <MenuBar layoutY="2.0" styleClass="menu-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu id="opcionAccesibilidad" mnemonicParsing="false" styleClass="menu-item" text="Accesibilidad">
+                    <items>
+                        <MenuItem fx:id="menuItemAccesibilidad" mnemonicParsing="false" onAction="#abrirAccesibilidad" text="Abrir Accesibilidad..." />
+                    </items>
+                </Menu>
+                <Menu id="opcionAyuda" mnemonicParsing="false" styleClass="menu-item" text="Ayuda">
+                    <items>
+                        <MenuItem fx:id="menuItemAyuda" mnemonicParsing="false" onAction="#abrirAyuda" text="Abrir Ayuda..." />
+                    </items>
+                </Menu>
+                <Menu id="salir" mnemonicParsing="false" styleClass="menu-item" text="Volver">
+                    <items>
+                        <MenuItem fx:id="menuItemVolver" mnemonicParsing="false" onAction="#volver" text="Volver..." />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Label alignment="CENTER" layoutX="268.0" layoutY="70.0" styleClass="bold" text="CONSULTA 4 - PRODUCTOS SIN CATEGORÍA" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+        <VBox layoutX="74.0" layoutY="121.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="150.0">
+            <children>
+            <TableView fx:id="tablaProductos" prefHeight="615.0" prefWidth="1200.0">
+               <columns>
+                  <TableColumn fx:id="colIdProducto" prefWidth="75.0" text="Id" />
+                  <TableColumn fx:id="colDescripcion" prefWidth="378.3" text="Descripcion" />
+                  <TableColumn fx:id="colEAN13" prefWidth="378.3" text="EAN13" />
+                  <TableColumn fx:id="colKeyRFID" prefWidth="365.0" text="keyRFID" />
+               </columns>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TableView>
+            </children>
+        </VBox>
+    </children>
+    <stylesheets>
+        <URL value="@../../../../styles/styles.css" />
+        <URL value="@../../../../styles/table.css" />
+    </stylesheets>
+</AnchorPane>

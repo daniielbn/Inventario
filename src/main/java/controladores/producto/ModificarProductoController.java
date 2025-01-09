@@ -2,23 +2,15 @@ package controladores.producto;
 
 import DAO.ProductoDAO;
 import com.example.inventario_hib.App;
-import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import modelo.Aula;
 import modelo.Producto;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ModificarProductoController {
     private final ProductoDAO productoDAO = new ProductoDAO();
     private Producto productoSeleccionado;
-
-    @FXML
-    private ComboBox<Long> cbIdProducto;
 
     @FXML
     private TextField txtDescripcion;
@@ -27,70 +19,21 @@ public class ModificarProductoController {
     @FXML
     private TextField txtRFID;
 
-    @FXML
-    private TableView<Producto> tablaProductos;
-    @FXML
-    private TableColumn<Producto, Long> colIdProducto;
-    @FXML
-    private TableColumn<Producto, String> colDescripcion;
-    @FXML
-    private TableColumn<Producto, Long> colEAN13;
-    @FXML
-    private TableColumn<Producto, String> colKeyRFID;
-
     @FXML // Importamos el botón de limpiar
     private Button buttonLimpiar;
 
+
     @FXML
     public void initialize() {
-        colIdProducto.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("idProducto"));
-        colDescripcion.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("descripcion"));
-        colEAN13.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("EAN13"));
-        colKeyRFID.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("keyRFID"));
-        cargarProductos();
+        productoSeleccionado = (Producto) App.getUserData();
 
-        tablaProductos.getSelectionModel().selectedItemProperty().addListener((ChangeListener<Producto>) (observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                productoSeleccionado = newValue;
-                cbIdProducto.setValue(productoSeleccionado.getIdProducto());
-                txtDescripcion.setText(productoSeleccionado.getDescripcion());
-                txtEAN13.setText(productoSeleccionado.getEAN13().toString());
-                txtRFID.setText(productoSeleccionado.getKeyRFID());
-            }
-        });
-
-        cbIdProducto.getItems().setAll(obtenerIdProductos());
-
-        cbIdProducto.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                productoSeleccionado = productoDAO.obtenerPorId(newValue);
-                tablaProductos.getSelectionModel().select(productoSeleccionado);
-                cbIdProducto.setValue(productoSeleccionado.getIdProducto());
-                txtDescripcion.setText(productoSeleccionado.getDescripcion());
-                txtEAN13.setText(productoSeleccionado.getEAN13().toString());
-                txtRFID.setText(productoSeleccionado.getKeyRFID());
-            }
-        });
+        limpiar();
 
         buttonLimpiar.setOnAction(event ->
-                limpiar(event)
+                limpiar()
         );
     }
 
-    private void cargarProductos() {
-        List<Producto> productos = productoDAO.getTodos();
-        tablaProductos.getItems().clear();
-        tablaProductos.getItems().setAll(productos);
-    }
-
-    private List<Long> obtenerIdProductos() {
-        List<Producto> productos = productoDAO.getTodos();
-        List<Long> ids = new ArrayList<>();
-        for (Producto producto : productos) {
-            ids.add(producto.getIdProducto());
-        }
-        return ids;
-    }
 
     public void abrirAccesibilidad(ActionEvent actionEvent) {
         try {
@@ -128,12 +71,10 @@ public class ModificarProductoController {
         }
     }
 
-    public void limpiar(ActionEvent actionEvent) {
-        productoSeleccionado = null;
-        cbIdProducto.setValue(null);
-        txtDescripcion.clear();
-        txtEAN13.clear();
-        txtRFID.clear();
+    private void limpiar() {
+        txtDescripcion.setText(productoSeleccionado.getDescripcion());
+        txtEAN13.setText(productoSeleccionado.getEAN13().toString());
+        txtRFID.setText(productoSeleccionado.getKeyRFID());
     }
 
     public void modificar(ActionEvent actionEvent) {
@@ -150,7 +91,7 @@ public class ModificarProductoController {
                             "\nEAN13: " + txtEAN13.getText() +
                             "\nKeyRFID: " + txtRFID.getText());
                     alert.showAndWait();
-                    cargarProductos();
+                    volver(actionEvent);
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Modificar Aula");

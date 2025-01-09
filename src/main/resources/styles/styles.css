@@ -1,0 +1,43 @@
+.btn {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+}
+
+.btn:hover {
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: black;
+}
+
+.btn-confirmar {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: #01a201;
+}
+
+.btn-confirmar:hover {
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #004500;
+}
+
+.pane:hover {
+    -fx-background-color: #000000;
+}
+
+.crear {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: #099D00;
+}
+
+.modificar {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: #35AAED;
+}
+
+.eliminar {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: #FF2626;
+}

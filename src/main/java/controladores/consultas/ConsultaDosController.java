@@ -1,23 +1,31 @@
-package controladores.marcaje;
+package controladores.consultas;
 
+import DAO.AulaDAO;
 import DAO.MarcajeDAO;
 import com.example.inventario_hib.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import modelo.Aula;
 import modelo.Marcaje;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ListarMarcajesController {
-    private final MarcajeDAO marcajeDAO = new MarcajeDAO();
+public class ConsultaDosController {
+    private static final AulaDAO aulaDAO = new AulaDAO();
+    private static final MarcajeDAO marcajeDAO = new MarcajeDAO();
+    private Aula aulaSeleccionada;
 
+    @FXML
+    private ComboBox<Long> cbIdAula;
     @FXML
     private DatePicker dateInicio;
     @FXML
     private DatePicker dateFinal;
+
 
     @FXML
     private TableView<Marcaje> tablaMarcajes;
@@ -42,10 +50,22 @@ public class ListarMarcajesController {
         colIdProducto.setCellValueFactory(new PropertyValueFactory<>("idProducto"));
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        cargarMarcajes();
+
+        cbIdAula.getItems().setAll(obtenerIdAulas());
+
+        cbIdAula.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (cbIdAula.getValue() != null) {
+                aulaSeleccionada = aulaDAO.obtenerPorId(cbIdAula.getValue());
+                filtrarEntreFechas();
+            }
+        });
 
         dateInicio.valueProperty().addListener((observable, oldValue, newValue) -> {
-            filtrarEntreFechas();
+            if (dateInicio.getValue() != null && dateFinal.getValue() != null) {
+                if (comprobarInicioYFin()) {
+                    filtrarEntreFechas();
+                }
+            }
         });
 
         dateFinal.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -53,22 +73,26 @@ public class ListarMarcajesController {
         });
 
         buttonLimpiar.setOnAction(event ->
-                limpiar(event)
+                limpiar()
         );
+    }
+
+    private List<Long> obtenerIdAulas() {
+        List<Aula> productos = aulaDAO.getTodos();
+        List<Long> idAulas = new ArrayList<>();
+        for (Aula aula : productos) {
+            idAulas.add(aula.getIdAula());
+        }
+        return idAulas;
     }
 
     private void filtrarEntreFechas() {
         if (comprobarFechas() && comprobarInicioYFin()) {
             LocalDate inicio = dateInicio.getValue();
             LocalDate fin = dateFinal.getValue();
-            List<Marcaje> marcajes = marcajeDAO.getEntreFechas(inicio, fin);
+            List<Marcaje> marcajes = marcajeDAO.obtenerMarcajesDeAulaEntreFechas(aulaSeleccionada, inicio, fin);
             tablaMarcajes.getItems().setAll(marcajes);
         }
-    }
-
-    private void cargarMarcajes() {
-        List<Marcaje> marcajes = marcajeDAO.getTodos();
-        tablaMarcajes.getItems().setAll(marcajes);
     }
 
     public void abrirAccesibilidad(ActionEvent actionEvent) {
@@ -84,13 +108,12 @@ public class ListarMarcajesController {
         try {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Ayuda");
-            alert.setHeaderText("Ayuda");
-            alert.setContentText("Esta es la ventana de listado de marcajes. Aquí se mostrarán todas los marcajes disponibles en el sistema.\n" +
-                    "Existe la opción de filtrar los resultados mediante los campos de búsqueda.\n" +
-                    "El primer campo pertenece a la fecha de inicio por la que se quiere comenzar a filtrar.\n" +
-                    "El segundo campo pertenece a la fecha de final para la que se quiere terminar de filtar.\n" +
-                    "El resultado serán los marcajes que tenga su fecha dentro del intervalo de fechas que hayas marcado.\n" +
-                    "Para limpiar los campos, debe pulsar el botón 'Limpiar'");
+            alert.setHeaderText("Ayuda - Consulta 2");
+            alert.setContentText("En esta ventana puedes consultar los marcajes de una sola aula en un rango de dos fechas." +
+                    "\n\nPara ello, selecciona un aula de la lista desplegable y elige dos fechas." +
+                    "\nPuedes pulsar el botón de 'Limpiar' si deseas vacías los campos." +
+                    "\nPor último, si lo deseas, puedes pulsar el botón de 'Volver' para volver a la página inicial.");
+            alert.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,38 +121,51 @@ public class ListarMarcajesController {
 
     public void volver(ActionEvent actionEvent) {
         try {
-            App.setDirectory(3);
-            App.setRoot("marcajes", "Sistema de gestión de Marcajes.");
+            App.setDirectory(0);
+            App.setRoot("principal", "Sistema de gestión de productos mediante RFID - Daniel Brito Negrín.");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void limpiar(ActionEvent actionEvent) {
+    private void limpiar() {
+        cbIdAula.setValue(null);
         dateInicio.setValue(null);
         dateFinal.setValue(null);
-        cargarMarcajes();
+        tablaMarcajes.getItems().clear();
     }
 
-    private boolean comprobarFechas() {
-        if (dateInicio.getValue() == null || dateFinal.getValue() == null) {
+    private boolean comprobarLista() {
+        if (cbIdAula.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Error");
-            alert.setContentText("Debes seleccionar una fecha de inicio y una fecha final para poder filtrar los marcajes.");
+            alert.setHeaderText("Error en la selección de aula");
+            alert.setContentText("Por favor, selecciona un aula de la lista desplegable.");
             alert.showAndWait();
             return false;
         }
         return true;
     }
 
+    private boolean comprobarFechas() {
+        if (dateInicio.getValue() == null || dateFinal.getValue() == null) {
+            return false;
+        }
+        return true;
+    }
+
     private boolean comprobarInicioYFin() {
+        if (!comprobarFechas()) {
+            return false;
+        }
         if (dateInicio.getValue().isAfter(dateFinal.getValue())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Error");
-            alert.setContentText("La fecha de inicio no puede ser posterior a la fecha final.");
+            alert.setHeaderText("Error en el rango de fechas");
+            alert.setContentText("La fecha de inicio no puede ser posterior a la fecha final. Por favor, corrige el rango de fechas.");
             alert.showAndWait();
+            dateInicio.setValue(null);
+            dateFinal.setValue(null);
             return false;
         }
         return true;

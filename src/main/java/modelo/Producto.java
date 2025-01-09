@@ -22,7 +22,7 @@ public class Producto {
     @Column(name = "keyRFID")
     private String keyRFID;
 
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_categorias",
             joinColumns = @JoinColumn(name = "idProducto", referencedColumnName = "idProducto", nullable = true),
             inverseJoinColumns = @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria", nullable = true))

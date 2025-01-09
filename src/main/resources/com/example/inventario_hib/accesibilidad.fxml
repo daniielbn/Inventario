@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" styleClass="pane" stylesheets="@../../../styles/styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.AccesibilidadController">
+   <children>
+      <MenuBar layoutY="2.0" styleClass="menu-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu id="opcionAyuda" mnemonicParsing="false" styleClass="menu-item" text="Ayuda">
+               <items>
+                  <MenuItem fx:id="menuItemAyuda" mnemonicParsing="false" onAction="#abrirAyuda" text="Abrir Ayuda..." />
+               </items>
+            </Menu>
+            <Menu id="salir" mnemonicParsing="false" styleClass="menu-item" text="Volver">
+               <items>
+                  <MenuItem fx:id="menuItemVolver" mnemonicParsing="false" onAction="#volver" text="Volver..." />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label layoutX="504.0" layoutY="63.0" text="ACCESIBILIDAD" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <VBox layoutX="69.0" layoutY="135.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="150.0">
+         <children>
+            <HBox prefHeight="212.0" prefWidth="1200.0">
+               <children>
+                  <VBox alignment="CENTER" onMouseClicked="#proximamente" prefHeight="200.0" prefWidth="400.0" styleClass="pane">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/text-size-format.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="AJUSTAR TAMAÑO DEL TEXTO" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" onMouseClicked="#proximamente" prefHeight="200.0" prefWidth="400.0" styleClass="pane">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/read.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="LECTOR DE TEXTO" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" onMouseClicked="#proximamente" prefHeight="200.0" prefWidth="400.0" styleClass="pane">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/voice.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="COMANDOS DE VOZ" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="212.0" prefWidth="1200.0">
+               <children>
+                  <VBox alignment="CENTER" onMouseClicked="#proximamente" prefHeight="200.0" prefWidth="400.0" styleClass="pane">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/half-moon.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="CONTRASTE OSCURO" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" onMouseClicked="#proximamente" prefHeight="200.0" prefWidth="400.0" styleClass="pane">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/sun.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="CONTRASTE CLARO" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" onMouseClicked="#proximamente" prefHeight="200.0" prefWidth="400.0" styleClass="pane">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/circle-half.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="MODO DE CONTRASTE" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="212.0" prefWidth="1200.0">
+               <children>
+                  <VBox alignment="CENTER" onMouseClicked="#proximamente" prefHeight="200.0" prefWidth="400.0" styleClass="pane">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/zoom.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="ZOOM" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" onMouseClicked="#proximamente" prefHeight="200.0" prefWidth="400.0" styleClass="pane">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/learner.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="MODO LEGIBLE" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" onMouseClicked="#proximamente" prefHeight="200.0" prefWidth="400.0" styleClass="pane">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/ear.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Label prefHeight="86.0" prefWidth="390.0" text="ADAPTACIÓN AL LECTOR DE PANTALLA" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

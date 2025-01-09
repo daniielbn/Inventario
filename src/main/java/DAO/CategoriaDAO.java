@@ -1,10 +1,13 @@
 package DAO;
 
 import com.example.inventario_hib.HibernateUtil;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import modelo.Categoria;
 import org.hibernate.Session;
 
 import java.util.List;
+
 
 public class CategoriaDAO extends GenericDAO<Categoria> {
     public CategoriaDAO() {

@@ -22,4 +22,8 @@ module com.example.inventario_hib {
     opens controladores.marcaje to javafx.fxml;
     exports controladores.producto;
     opens controladores.producto to javafx.fxml;
+    exports controladores.prodCat;
+    opens controladores.prodCat to javafx.fxml;
+    exports controladores.consultas;
+    opens controladores.consultas to javafx.fxml;
 }

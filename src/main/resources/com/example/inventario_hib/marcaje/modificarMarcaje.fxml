@@ -11,9 +11,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -34,74 +31,62 @@
                 </Menu>
                 <Menu id="salir" mnemonicParsing="false" styleClass="menu-item" text="Volver">
                     <items>
-                        <MenuItem fx:id="menuItemSalir" mnemonicParsing="false" onAction="#volver" text="Volver..." />
+                        <MenuItem fx:id="menuItemVolver" mnemonicParsing="false" onAction="#volver" text="Volver..." />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <Label alignment="CENTER" layoutX="184.0" layoutY="74.0" styleClass="bold" text="HAS ELEGIDO LA OPCIÓN DE MODIFICAR MARCAJES" textAlignment="CENTER" textFill="WHITE">
+        <Label alignment="CENTER" layoutX="191.0" layoutY="78.0" styleClass="bold" text="HAS ELEGIDO LA OPCIÓN DE 'MODIFICAR MARCAJES'" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>
         </Label>
-        <AnchorPane layoutX="1000.0" layoutY="562.0" prefHeight="27.0" prefWidth="111.0">
-            <fx:include fx:id="buttonLimpiar" source="../buttonLimpiar.fxml" />
-        </AnchorPane>
-        <ComboBox fx:id="cbIdMarcajes" layoutX="852.0" layoutY="181.0" prefHeight="35.0" prefWidth="342.0" />
-        <Label layoutX="656.0" layoutY="185.0" text="ID del Marcaje:" textFill="WHITE">
+        <Label layoutX="373.0" layoutY="205.0" text="ID del Aula:" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="18.0" />
+                <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Label layoutX="656.0" layoutY="430.0" text="Tipo:" textFill="WHITE">
+        <Label layoutX="375.0" layoutY="295.0" text="ID del Producto:" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="18.0" />
+                <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="buttonModificar" layoutX="791.0" layoutY="562.0" mnemonicParsing="false" onAction="#modificar" prefHeight="27.0" prefWidth="111.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Modificar">
+        <Label layoutX="373.0" layoutY="385.0" text="Tipo:" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Button fx:id="buttonModificar" layoutX="452.0" layoutY="525.0" mnemonicParsing="false" onAction="#modificar" prefHeight="39.0" styleClass="btn-confirmar" stylesheets="@../../../../styles/styles.css" text="Modificar marcaje">
             <font>
                 <Font name="System Bold Italic" size="18.0" />
             </font>
         </Button>
-        <RadioButton fx:id="rbEntrada" layoutX="794.0" layoutY="430.0" mnemonicParsing="false" selected="true" text="Entrada" textFill="WHITE">
+        <AnchorPane layoutX="688.0" layoutY="525.0" prefHeight="60.0" prefWidth="293.0">
+            <children>
+                <fx:include fx:id="buttonLimpiar" source="../buttonLimpiar.fxml" />
+            </children>
+        </AnchorPane>
+
+        <ComboBox fx:id="cbIdAulas" layoutX="556.0" layoutY="205.0" prefHeight="30.0" prefWidth="365.0" />
+        <ComboBox fx:id="cbIdProductos" layoutX="556.0" layoutY="295.0" prefHeight="30.0" prefWidth="365.0" />
+        <RadioButton fx:id="rbEntrada" layoutX="572.0" layoutY="387.0" mnemonicParsing="false" selected="true" text="Entrada" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
-         <toggleGroup>
-            <ToggleGroup fx:id="rgTipo" />
-         </toggleGroup>
+            <toggleGroup>
+                <ToggleGroup fx:id="rgTipo" />
+            </toggleGroup>
         </RadioButton>
-        <RadioButton fx:id="rbSalida" layoutX="1051.0" layoutY="430.0" mnemonicParsing="false" text="Salida" textFill="WHITE" toggleGroup="$rgTipo">
+        <RadioButton fx:id="rbSalida" layoutX="787.0" layoutY="387.0" mnemonicParsing="false" text="Salida" textFill="WHITE" toggleGroup="$rgTipo">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </RadioButton>
-      <TableView fx:id="tablaMarcajes" layoutX="32.0" layoutY="168.0" prefHeight="520.0" prefWidth="594.0">
-         <columns>
-            <TableColumn fx:id="colIdMarcaje" prefWidth="43.0" text="Id" />
-            <TableColumn fx:id="colIdAula" prefWidth="173.0" text="Id Aula" />
-            <TableColumn fx:id="colIdProducto" prefWidth="173.0" text="Id Producto" />
-            <TableColumn fx:id="colFecha" prefWidth="147.0" text="Fecha" />
-            <TableColumn fx:id="colTipo" prefWidth="57.0" text="Tipo" />
-         </columns>
-      </TableView>
-      <Label layoutX="656.0" layoutY="265.0" text="ID del Aula:" textFill="WHITE">
+      <DatePicker fx:id="dateFecha" layoutX="563.0" layoutY="458.0" prefHeight="25.0" prefWidth="365.0" />
+      <Label layoutX="375.0" layoutY="456.0" text="Fecha:" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cbIdAulas" layoutX="852.0" layoutY="261.0" prefHeight="35.0" prefWidth="342.0" />
-      <Label layoutX="656.0" layoutY="342.0" text="ID del Producto:" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="cbIdProductos" layoutX="852.0" layoutY="338.0" prefHeight="35.0" prefWidth="342.0" />
-      <Label layoutX="656.0" layoutY="503.0" text="Fecha:" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <DatePicker fx:id="dateFecha" layoutX="791.0" layoutY="499.0" prefHeight="35.0" prefWidth="408.0" />
     </children>
 </AnchorPane>

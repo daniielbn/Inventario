@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -8,7 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.categoria.CategoriasController">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.categoria.CategoriasController">
     <children>
         <MenuBar layoutY="2.0" styleClass="menu-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
@@ -31,50 +38,127 @@
                 <Font name="System Bold" size="36.0" />
             </font>
         </Label>
-        <Label layoutX="407.0" layoutY="150.0" prefHeight="35.0" prefWidth="486.0" text="Por favor, indique la acción que desea realizar" textFill="WHITE" AnchorPane.leftAnchor="407.0" AnchorPane.rightAnchor="407.0">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonCrearCategoria" layoutX="177.0" layoutY="339.0" mnemonicParsing="false" onAction="#crearCategoria" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ir al formulario">
-            <font>
-                <Font name="System Bold Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="172.0" layoutY="277.0" text="CREAR NUEVA CATEGORÍA" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonListarCategorias" layoutX="177.0" layoutY="534.0" mnemonicParsing="false" onAction="#listarCategorias" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ver la tabla">
-            <font>
-                <Font name="System Bold Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="140.0" layoutY="470.0" text="LISTAR TODAS LAS CATEGORÍAS" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonModificarCategoria" layoutX="850.0" layoutY="339.0" mnemonicParsing="false" onAction="#modificarCategoria" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ir a formulario">
-            <font>
-                <Font name="System Bold Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="830.0" layoutY="277.0" text="MODIFICAR UNA CATEGORÍA" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonEliminarCategoria" layoutX="851.0" layoutY="534.0" mnemonicParsing="false" onAction="#eliminarCategoria" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ver tabla">
-            <font>
-                <Font name="System Bold Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="840.0" layoutY="470.0" text="ELIMINAR UNA CATEGORÍA" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
+      <TextField fx:id="txtDescripcion" layoutX="712.0" layoutY="265.0" prefHeight="39.0" prefWidth="250.0" promptText="Descripción" style="-fx-background-radius: 5;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtNombre" layoutX="342.0" layoutY="266.0" prefHeight="39.0" prefWidth="250.0" promptText="Nombre" style="-fx-background-radius: 5;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="203.0" layoutY="272.0" text="FILTROS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tablaCategorias" layoutX="69.0" layoutY="325.0" prefHeight="436.0" prefWidth="1210.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+         <columns>
+            <TableColumn fx:id="colIdCategoria" prefWidth="75.0" text="Id" />
+            <TableColumn fx:id="colNombre" prefWidth="378.3" text="Nombre" />
+            <TableColumn fx:id="colDescripcion" prefWidth="378.3" text="Descripción" />
+            <TableColumn fx:id="colEstado" prefWidth="365.0" text="Estado" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="158.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../img/filter.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="1055.0" layoutY="271.0" prefHeight="27.0" prefWidth="111.0" style="-fx-background-color: transparent;">
+         <children>
+            <fx:include fx:id="buttonLimpiar" source="../buttonLimpiar.fxml" />
+         </children>
+      </AnchorPane>
+      <HBox alignment="CENTER" layoutX="52.0" layoutY="116.0" prefHeight="135.0" prefWidth="1300.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+         <children>
+            <HBox alignment="CENTER" onMouseClicked="#crearCategoria" prefHeight="115.0">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../img/create.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="Crear categoría" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="crear" />
+               </styleClass>
+            </HBox>
+            <HBox alignment="CENTER" onMouseClicked="#modificarCategoria" prefHeight="100.0">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../img/update.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="Modificar categoría" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="25.0" right="325.0" top="20.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="modificar" />
+               </styleClass>
+            </HBox>
+            <HBox alignment="CENTER" onMouseClicked="#eliminarCategoria" prefHeight="100.0">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../img/delete.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="Eliminar categoría" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="eliminar" />
+               </styleClass>
+            </HBox>
+         </children>
+      </HBox>
     </children>
+   <stylesheets>
+      <URL value="@../../../../styles/styles.css" />
+      <URL value="@../../../../styles/table.css" />
+   </stylesheets>
 </AnchorPane>

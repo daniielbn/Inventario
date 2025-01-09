@@ -49,7 +49,7 @@ public abstract class GenericDAO<T> {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.delete(t);
+            session.remove(t);
             transaction.commit();
             return true;
         } catch (Exception e) {

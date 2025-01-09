@@ -15,5 +15,6 @@
         <mapping class="modelo.Categoria"/>
         <mapping class="modelo.Marcaje"/>
         <mapping class="modelo.Aula"/>
+        <mapping class="modelo.ProductoCategoria"/>
     </session-factory>
 </hibernate-configuration>

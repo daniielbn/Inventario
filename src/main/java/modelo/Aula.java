@@ -2,8 +2,6 @@ package modelo;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table (name = "aula")
 public class Aula {

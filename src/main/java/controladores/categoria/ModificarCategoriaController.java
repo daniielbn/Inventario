@@ -2,24 +2,17 @@ package controladores.categoria;
 
 import DAO.CategoriaDAO;
 import com.example.inventario_hib.App;
-import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import modelo.Aula;
 import modelo.Categoria;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class ModificarCategoriaController {
     private final CategoriaDAO categoriaDAO = new CategoriaDAO();
     private Categoria categoriaSeleccionada;
 
-    @FXML
-    private ComboBox<Long> cbIdCategorias;
     @FXML
     private TextField txtNombre;
     @FXML
@@ -29,78 +22,18 @@ public class ModificarCategoriaController {
     @FXML
     private RadioButton rbDesactivada;
 
-    @FXML
-    private TableView<Categoria> tablaCategorias;
-    @FXML
-    private TableColumn<Categoria, Long> colIdCategoria;
-    @FXML
-    private TableColumn<Categoria, String> colNombre;
-    @FXML
-    private TableColumn<Categoria, String> colDescripcion;
-    @FXML
-    private TableColumn<Categoria, Boolean> colEstado;
-
     @FXML // Importamos el botón de limpiar
     private Button buttonLimpiar;
 
     @FXML
     public void initialize() {
-        colIdCategoria.setCellValueFactory(new PropertyValueFactory<>("idCategoria"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
-        cargarCategorias();
+        categoriaSeleccionada = (Categoria) App.getUserData();
 
-        cbIdCategorias.getItems().setAll(obtenerIdCategorias());
-
-        tablaCategorias.getSelectionModel().selectedItemProperty().addListener((ChangeListener<Categoria>) (observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                categoriaSeleccionada = newValue;
-                cbIdCategorias.setValue(categoriaSeleccionada.getIdCategoria());
-                txtNombre.setText(categoriaSeleccionada.getNombre());
-                txtDescripcion.setText(categoriaSeleccionada.getDescripcion());
-                if (categoriaSeleccionada.isEstado()) {
-                    rbActivada.setSelected(true);
-                } else {
-                    rbDesactivada.setSelected(true);
-                }
-            }
-        });
-
-        cbIdCategorias.valueProperty().addListener((ChangeListener<Long>) (observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                Categoria categoria = categoriaDAO.obtenerPorId(newValue);
-                if (categoria != null) {
-                    categoriaSeleccionada = categoria;
-                    txtNombre.setText(categoriaSeleccionada.getNombre());
-                    txtDescripcion.setText(categoriaSeleccionada.getDescripcion());
-                    if (categoriaSeleccionada.isEstado()) {
-                        rbActivada.setSelected(true);
-                    } else {
-                        rbDesactivada.setSelected(true);
-                    }
-                }
-            }
-        });
+        limpiar();
 
         buttonLimpiar.setOnAction(event ->
                 limpiar()
         );
-    }
-
-    private void cargarCategorias() {
-        List<Categoria> categorias = categoriaDAO.getTodos();
-        tablaCategorias.getItems().clear();
-        tablaCategorias.getItems().setAll(categorias);
-    }
-
-    private List<Long> obtenerIdCategorias() {
-        List<Categoria> categorias = categoriaDAO.getTodos();
-        List<Long> idCategorias = new ArrayList<>();
-        for (Categoria categoria : categorias) {
-            idCategorias.add(categoria.getIdCategoria());
-        }
-        return idCategorias;
     }
 
     public void abrirAccesibilidad(ActionEvent actionEvent) {
@@ -150,7 +83,6 @@ public class ModificarCategoriaController {
                         "\nDescripción: " + categoriaSeleccionada.getDescripcion() +
                         "\nEstado: " + (categoriaSeleccionada.isEstado() ? "Activado" : "Desactivado"));
                 alert.showAndWait();
-                cargarCategorias();
                 limpiar();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -163,13 +95,10 @@ public class ModificarCategoriaController {
     }
 
     private void limpiar() {
-        categoriaSeleccionada = null;
-        cbIdCategorias.setValue(null);
-        tablaCategorias.getSelectionModel().clearSelection();
-        txtNombre.clear();
-        txtDescripcion.clear();
-        rbActivada.setSelected(false);
-        rbDesactivada.setSelected(false);
+        txtNombre.setText(categoriaSeleccionada.getNombre());
+        txtDescripcion.setText(categoriaSeleccionada.getDescripcion());
+        rbActivada.setSelected(categoriaSeleccionada.isEstado());
+        rbDesactivada.setSelected(!categoriaSeleccionada.isEstado());
     }
 
     private boolean comprobarCampos() {

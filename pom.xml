@@ -48,6 +48,12 @@
             <artifactId>hibernate-core</artifactId>
             <version>6.6.3.Final</version>
         </dependency>
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

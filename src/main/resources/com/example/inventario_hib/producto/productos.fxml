@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -25,55 +28,132 @@
                     </items></Menu>
             </menus>
         </MenuBar>
-        <Label alignment="CENTER" layoutX="178.0" layoutY="68.0" prefHeight="53.0" prefWidth="945.0" styleClass="bold" text="HAS ELEGIDO LA OPCIÓN DE GESTIÓN DE PRODUCTOS" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="178.0" AnchorPane.rightAnchor="177.0">
+        <Label alignment="CENTER" layoutX="178.0" layoutY="55.0" prefHeight="53.0" prefWidth="945.0" styleClass="bold" text="HAS ELEGIDO LA OPCIÓN DE GESTIÓN DE PRODUCTOS" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="178.0" AnchorPane.rightAnchor="177.0">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>
         </Label>
-        <Label layoutX="407.0" layoutY="150.0" prefHeight="35.0" prefWidth="486.0" text="Por favor, indique la acción que desea realizar" textFill="WHITE" AnchorPane.leftAnchor="407.0" AnchorPane.rightAnchor="407.0">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonCrearProducto" layoutX="177.0" layoutY="339.0" mnemonicParsing="false" onAction="#crearProducto" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ir al formulario">
-            <font>
-                <Font name="System Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="172.0" layoutY="277.0" text="CREAR NUEVO PRODUCTO" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonListarProductos" layoutX="171.0" layoutY="534.0" mnemonicParsing="false" onAction="#listarProductos" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ver la tabla">
-            <font>
-                <Font name="System Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="140.0" layoutY="470.0" text="LISTAR TODOS LOS PRODUCTOS" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonModificarProducto" layoutX="850.0" layoutY="339.0" mnemonicParsing="false" onAction="#modificarProducto" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ir a formulario">
-            <font>
-                <Font name="System Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="830.0" layoutY="277.0" text="MODIFICAR UN PRODUCTO" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
-        <Button fx:id="buttonEliminarProducto" layoutX="851.0" layoutY="534.0" mnemonicParsing="false" onAction="#eliminarProducto" prefHeight="60.0" prefWidth="293.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Ver tabla">
-            <font>
-                <Font name="System Italic" size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="840.0" layoutY="470.0" text="ELIMINAR UN PRODUCTO" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Label>
+      <TextField fx:id="txtRFID" layoutX="681.0" layoutY="261.0" prefHeight="39.0" prefWidth="250.0" promptText="KeyRFID" style="-fx-background-radius: 5;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <AnchorPane layoutX="1003.0" layoutY="261.0" prefHeight="27.0" prefWidth="111.0">
+         <children>
+            <fx:include fx:id="buttonLimpiar" source="../buttonLimpiar.fxml" />
+         </children>
+      </AnchorPane>
+      <TextField fx:id="txtDescripcion" layoutX="326.0" layoutY="261.0" prefHeight="39.0" prefWidth="250.0" promptText="Descripción" style="-fx-background-radius: 5;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="206.0" layoutY="267.0" text="FILTROS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tablaProductos" layoutX="50.0" layoutY="323.0" prefHeight="436.0" prefWidth="1210.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+         <columns>
+            <TableColumn fx:id="colIdProducto" prefWidth="75.0" text="Id" />
+            <TableColumn fx:id="colDescripcion" prefWidth="378.3" text="Descripcion" />
+            <TableColumn fx:id="colEAN13" prefWidth="378.3" text="EAN13" />
+            <TableColumn fx:id="colKeyRFID" prefWidth="365.0" text="keyRFID" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="162.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../img/filter.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER" layoutX="25.0" layoutY="108.0" prefHeight="135.0" prefWidth="1300.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+         <children>
+            <HBox alignment="CENTER" onMouseClicked="#crearProducto" prefHeight="115.0">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../img/create.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="Crear producto" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="crear" />
+               </styleClass>
+            </HBox>
+            <HBox alignment="CENTER" onMouseClicked="#modificarProducto" prefHeight="100.0">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../img/update.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="Modificar producto" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="25.0" right="400.0" top="20.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="modificar" />
+               </styleClass>
+            </HBox>
+            <HBox alignment="CENTER" onMouseClicked="#eliminarProducto" prefHeight="100.0">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../img/delete.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="Eliminar producto" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="pane" />
+                  <String fx:value="eliminar" />
+               </styleClass>
+            </HBox>
+         </children>
+      </HBox>
     </children>
+   <stylesheets>
+      <URL value="@../../../../styles/styles.css" />
+      <URL value="@../../../../styles/table.css" />
+   </stylesheets>
 </AnchorPane>

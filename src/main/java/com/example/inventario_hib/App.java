@@ -18,6 +18,8 @@ public class App extends Application {
         - 2: Directorio de categorias
         - 3: Directorio de marcajes
         - 4: Directorio de productos
+        - 5: Directorio de productos categorias
+        - 6: Consultas
      */
 
     public static int getDirectory() {
@@ -33,6 +35,8 @@ public class App extends Application {
         scene = new Scene(loadFXML("principal"), 1300, 800);
         stage.setTitle("Sistema de gestión de productos mediante RFID - Daniel Brito Negrín.");
         stage.setScene(scene);
+        stage.setResizable(false);
+        scene.getStylesheets().add(getClass().getResource("/styles/table.css").toExternalForm());
         stage.show();
     }
 
@@ -42,6 +46,18 @@ public class App extends Application {
         Stage stage = (Stage) scene.getWindow();
         stage.sizeToScene();
         stage.setTitle(title);
+    }
+
+    public static Object getUserData() {
+        Parent root = scene.getRoot();
+        Stage stage = (Stage) root.getScene().getWindow();
+        return stage.getUserData();
+    }
+
+    public static void setUserData(Object objeto) {
+        Parent root = scene.getRoot();
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.setUserData(objeto);
     }
 
     private static Parent loadFXML(String file) throws IOException {
@@ -62,6 +78,10 @@ public class App extends Application {
                 return "marcaje/";
             case 4:
                 return "producto/";
+            case 5:
+                return "producto_categoria/";
+            case 6:
+                return "consultas/";
             default:
                 return "";
         }

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.producto.ModificarProductoController">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.producto.ModificarProductoController">
     <children>
         <MenuBar layoutY="2.0" styleClass="menu-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
@@ -28,67 +29,55 @@
                 </Menu>
                 <Menu id="salir" mnemonicParsing="false" styleClass="menu-item" text="Volver">
                     <items>
-                        <MenuItem fx:id="menuItemSalir" mnemonicParsing="false" onAction="#volver" text="Volver..." />
+                        <MenuItem fx:id="menuItemVolver" mnemonicParsing="false" onAction="#volver" text="Volver..." />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <Label alignment="CENTER" layoutX="208.0" layoutY="71.0" styleClass="bold" text="HAS ELEGIDO LA OPCIÓN DE MODIFICAR PRODUCTOS" textAlignment="CENTER" textFill="WHITE">
+        <Label alignment="CENTER" layoutX="186.0" layoutY="69.0" styleClass="bold" text="HAS ELEGIDO LA OPCIÓN DE 'MODIFICAR PRODUCTO'" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>
         </Label>
-        <AnchorPane layoutX="968.0" layoutY="558.0" prefHeight="27.0" prefWidth="111.0">
-            <fx:include source="../buttonLimpiar.fxml" fx:id="buttonLimpiar"/>
-        </AnchorPane>
-        <ComboBox fx:id="cbIdProducto" layoutX="796.0" layoutY="204.0" prefHeight="35.0" prefWidth="403.0" />
-        <Label layoutX="634.0" layoutY="208.0" text="ID del Producto:" textFill="WHITE">
+        <TextField fx:id="txtDescripcion" layoutX="675.0" layoutY="203.0" prefHeight="35.0" prefWidth="274.0" promptText="Descripción">
             <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
-        <Label layoutX="639.0" layoutY="387.0" text="EAN13:" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
-        <Label layoutX="634.0" layoutY="303.0" text="Descripción:" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
-        <TextField fx:id="txtDescripcion" layoutX="796.0" layoutY="297.0" prefHeight="39.0" prefWidth="403.0" promptText="Ej.: Ordenador">
-            <font>
-                <Font size="18.0" />
+                <Font size="16.0" />
             </font>
         </TextField>
-        <Label layoutX="639.0" layoutY="465.0" text="KeyRFID:" textFill="WHITE">
+        <Label layoutX="373.0" layoutY="205.0" text="Descripción del Producto: " textFill="WHITE">
             <font>
-                <Font name="System Bold" size="18.0" />
+                <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="buttonModificar" layoutX="772.0" layoutY="558.0" mnemonicParsing="false" onAction="#modificar" prefHeight="27.0" prefWidth="111.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Modificar">
+        <Label layoutX="375.0" layoutY="295.0" text="EAN13 del Producto:" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Label layoutX="373.0" layoutY="385.0" text="KeyRFID del Producto:" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Button fx:id="buttonModificar" layoutX="433.0" layoutY="504.0" mnemonicParsing="false" onAction="#modificar" prefHeight="39.0" style="-fx-background-radius: 20;" styleClass="btn-confirmar" stylesheets="@../../../../styles/styles.css" text="Modificar producto">
             <font>
                 <Font name="System Bold Italic" size="18.0" />
             </font>
         </Button>
-      <TextField fx:id="txtEAN13" layoutX="796.0" layoutY="381.0" prefHeight="39.0" prefWidth="403.0" promptText="Ej.: 1234567890123">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="txtRFID" layoutX="796.0" layoutY="459.0" prefHeight="39.0" prefWidth="403.0" promptText="Ej.: RFID00001">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <TableView fx:id="tablaProductos" layoutX="48.0" layoutY="174.0" prefHeight="504.0" prefWidth="554.0">
-         <columns>
-            <TableColumn fx:id="colIdProducto" prefWidth="54.0" text="Id" />
-            <TableColumn fx:id="colDescripcion" prefWidth="166.66" text="Descripcion" />
-            <TableColumn fx:id="colEAN13" prefWidth="166.66" text="EAN13" />
-            <TableColumn fx:id="colKeyRFID" prefWidth="166.66" text="KeyRFID" />
-         </columns>
-      </TableView>
+        <AnchorPane layoutX="687.0" layoutY="504.0" prefHeight="60.0" prefWidth="293.0">
+            <children>
+                <fx:include fx:id="buttonLimpiar" source="../buttonLimpiar.fxml" />
+            </children>
+        </AnchorPane>
+        <TextField fx:id="txtEAN13" layoutX="675.0" layoutY="293.0" prefHeight="35.0" prefWidth="274.0" promptText="Ej.: 1234567890123">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="txtRFID" layoutX="675.0" layoutY="383.0" prefHeight="35.0" prefWidth="274.0" promptText="Ej.: RFID00001">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </TextField>
     </children>
 </AnchorPane>

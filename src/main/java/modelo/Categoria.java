@@ -20,7 +20,7 @@ public class Categoria {
     @Column(name = "estado")
     private boolean estado;
 
-    @ManyToMany(mappedBy = "categorias")
+    @ManyToMany(mappedBy = "categorias", fetch = FetchType.EAGER)
     private List<Producto> productos;
 
     public Categoria() {

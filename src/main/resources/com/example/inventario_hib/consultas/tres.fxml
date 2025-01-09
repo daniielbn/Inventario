@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #653239;" styleClass="pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.consultas.ConsultaTresController">
+    <children>
+        <MenuBar layoutY="2.0" styleClass="menu-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu id="opcionAccesibilidad" mnemonicParsing="false" styleClass="menu-item" text="Accesibilidad">
+                    <items>
+                        <MenuItem fx:id="menuItemAccesibilidad" mnemonicParsing="false" onAction="#abrirAccesibilidad" text="Abrir Accesibilidad..." />
+                    </items>
+                </Menu>
+                <Menu id="opcionAyuda" mnemonicParsing="false" styleClass="menu-item" text="Ayuda">
+                    <items>
+                        <MenuItem fx:id="menuItemAyuda" mnemonicParsing="false" onAction="#abrirAyuda" text="Abrir Ayuda..." />
+                    </items>
+                </Menu>
+                <Menu id="salir" mnemonicParsing="false" styleClass="menu-item" text="Volver">
+                    <items>
+                        <MenuItem fx:id="menuItemVolver" mnemonicParsing="false" onAction="#volver" text="Volver..." />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Label alignment="CENTER" layoutX="92.0" layoutY="66.0" styleClass="bold" text="CONSULTA 3 - MARCAJES DE UN AULA Y DE UN PRODUCTO" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+        <VBox layoutX="74.0" layoutY="121.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="150.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="125.0" prefWidth="1200.0">
+                    <children>
+                        <Label text="ID del Aula" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="22.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets right="50.0" />
+                            </HBox.margin>
+                        </Label>
+                        <ComboBox fx:id="cbIdAula" prefHeight="33.0" prefWidth="248.0" />
+                    </children>
+                </HBox>
+            <HBox alignment="CENTER" prefHeight="125.0" prefWidth="1200.0">
+               <children>
+                  <Label text="ID del Producto" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="cbIdProducto" prefHeight="33.0" prefWidth="248.0" />
+               </children>
+            </HBox>
+                <TableView fx:id="tablaMarcajes">
+                    <columns>
+                        <TableColumn fx:id="colIdMarcaje" prefWidth="75.0" text="Id" />
+                        <TableColumn fx:id="colIdAula" prefWidth="283.75" text="Aula" />
+                        <TableColumn fx:id="colIdProducto" prefWidth="283.75" text="Producto" />
+                        <TableColumn fx:id="colFecha" prefWidth="283.75" text="Fecha" />
+                        <TableColumn fx:id="colTipo" prefWidth="172.0" text="Tipo" />
+                    </columns>
+                    <VBox.margin>
+                        <Insets left="50.0" right="50.0" top="25.0" />
+                    </VBox.margin>
+                </TableView>
+                <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <AnchorPane>
+                            <children>
+                                <fx:include fx:id="buttonLimpiar" source="../buttonLimpiar.fxml" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="25.0" />
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+    <stylesheets>
+        <URL value="@../../../../styles/styles.css" />
+        <URL value="@../../../../styles/table.css" />
+    </stylesheets>
+</AnchorPane>

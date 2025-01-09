@@ -7,12 +7,13 @@ import com.example.inventario_hib.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import modelo.Aula;
 import modelo.Marcaje;
 import modelo.Producto;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,24 +26,9 @@ public class ModificarMarcajeController {
     private Marcaje marcajeSeleccionado;
 
     @FXML
-    private TableView<Marcaje> tablaMarcajes;
-    @FXML
-    private TableColumn<Marcaje, Long> colIdMarcaje;
-    @FXML
-    private TableColumn<Marcaje, Long> colIdAula;
-    @FXML
-    private TableColumn<Marcaje, Long> colIdProducto;
-    @FXML
-    private TableColumn<Marcaje, Date> colFecha;
-    @FXML
-    private TableColumn<Marcaje, Boolean> colTipo;
-
-    @FXML
     private ComboBox<Long> cbIdAulas;
     @FXML
     private ComboBox<Long> cbIdProductos;
-    @FXML
-    private ComboBox<Long> cbIdMarcajes;
     @FXML
     private RadioButton rbEntrada;
     @FXML
@@ -50,66 +36,29 @@ public class ModificarMarcajeController {
     @FXML
     private DatePicker dateFecha;
 
-
-
     @FXML
     private Button buttonLimpiar;
 
     @FXML
     public void initialize() {
-        colIdMarcaje.setCellValueFactory(new PropertyValueFactory<>("idMarcaje"));
-        colIdAula.setCellValueFactory(new PropertyValueFactory<>("idAula"));
-        colIdProducto.setCellValueFactory(new PropertyValueFactory<>("idProducto"));
-        colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        cargarMarcajes();
+        marcajeSeleccionado = (Marcaje) App.getUserData();
 
         cbIdAulas.getItems().setAll(obtenerIdAulas());
         cbIdProductos.getItems().setAll(obtenerIdProductos());
-        cbIdMarcajes.getItems().setAll(obtenerIdMarcajes());
 
-        tablaMarcajes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                marcajeSeleccionado = newValue;
-                cbIdMarcajes.setValue(marcajeSeleccionado.getIdMarcaje());
-                cbIdAulas.setValue(marcajeSeleccionado.getIdAula().getIdAula());
-                cbIdProductos.setValue(marcajeSeleccionado.getIdProducto().getIdProducto());
-                dateFecha.setValue(marcajeSeleccionado.getFecha().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
-                if (marcajeSeleccionado.isTipo()) {
-                    rbEntrada.setSelected(true);
-                } else {
-                    rbSalida.setSelected(true);
-                }
-            }
-        });
-
-        cbIdMarcajes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                Marcaje marcaje = marcajeDAO.obtenerPorId(newValue);
-                if (marcaje != null) {
-                    marcajeSeleccionado = marcaje;
-                    tablaMarcajes.getSelectionModel().select(marcaje);
-                    cbIdAulas.setValue(marcajeSeleccionado.getIdAula().getIdAula());
-                    cbIdProductos.setValue(marcajeSeleccionado.getIdProducto().getIdProducto());
-                    dateFecha.setValue(marcajeSeleccionado.getFecha().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
-                    if (marcajeSeleccionado.isTipo()) {
-                        rbEntrada.setSelected(true);
-                    } else {
-                        rbSalida.setSelected(true);
-                    }
-                }
-            }
-        });
+        rellenarCampos();
 
         buttonLimpiar.setOnAction(event ->
                 limpiar()
         );
     }
 
-    private void cargarMarcajes() {
-        List<Marcaje> marcajes = marcajeDAO.getTodos();
-        tablaMarcajes.getItems().clear();
-        tablaMarcajes.getItems().setAll(marcajes);
+    private void rellenarCampos() {
+        cbIdAulas.setValue(marcajeSeleccionado.getIdAula().getIdAula());
+        cbIdProductos.setValue(marcajeSeleccionado.getIdProducto().getIdProducto());
+        dateFecha.setValue(convertirALocalDate(marcajeSeleccionado.getFecha()));
+        rbEntrada.setSelected(marcajeSeleccionado.isTipo());
+        rbSalida.setSelected(!marcajeSeleccionado.isTipo());
     }
 
     private List<Long> obtenerIdAulas() {
@@ -128,15 +77,6 @@ public class ModificarMarcajeController {
             idProductos.add(producto.getIdProducto());
         }
         return idProductos;
-    }
-
-    private List<Long> obtenerIdMarcajes() {
-        List<Marcaje> marcajes = marcajeDAO.getTodos();
-        List<Long> idMarcajes = new ArrayList<>();
-        for (Marcaje marcaje : marcajes) {
-            idMarcajes.add(marcaje.getIdMarcaje());
-        }
-        return idMarcajes;
     }
 
     public void abrirAccesibilidad(ActionEvent actionEvent) {
@@ -176,14 +116,11 @@ public class ModificarMarcajeController {
     public void modificar(ActionEvent actionEvent) {
         if (comprobarCampos() && comprobarCamposModificados()) {
             Marcaje marcaje = new Marcaje();
-            marcaje.setIdMarcaje(cbIdMarcajes.getValue());
             marcaje.setIdAula(new Aula(cbIdAulas.getValue()));
             marcaje.setIdProducto(new Producto(cbIdProductos.getValue()));
             marcaje.setFecha(java.sql.Date.valueOf(dateFecha.getValue()));
             marcaje.setTipo(rbEntrada.isSelected());
             if (marcajeDAO.update(marcaje)) {
-                cargarMarcajes();
-                limpiar();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Información");
                 alert.setHeaderText("Marcaje modificado");
@@ -203,13 +140,11 @@ public class ModificarMarcajeController {
     }
 
     private void limpiar() {
-        marcajeSeleccionado = null;
-        cbIdAulas.setValue(null);
-        cbIdProductos.setValue(null);
-        cbIdMarcajes.setValue(null);
-        dateFecha.setValue(null);
-        rbEntrada.setSelected(false);
-        rbSalida.setSelected(false);
+        cbIdAulas.setValue(marcajeSeleccionado.getIdAula().getIdAula());
+        cbIdProductos.setValue(marcajeSeleccionado.getIdProducto().getIdProducto());
+        dateFecha.setValue(convertirALocalDate(marcajeSeleccionado.getFecha()));
+        rbEntrada.setSelected(marcajeSeleccionado.isTipo());
+        rbSalida.setSelected(!marcajeSeleccionado.isTipo());
     }
 
     private boolean comprobarCampos() {
@@ -234,5 +169,11 @@ public class ModificarMarcajeController {
             return false;
         }
         return true;
+    }
+
+    private LocalDate convertirALocalDate(Date fechaAConvertir) {
+        return fechaAConvertir.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
     }
 }

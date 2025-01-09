@@ -56,7 +56,7 @@
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="buttonCrear" layoutX="480.0" layoutY="504.0" mnemonicParsing="false" onAction="#crear" prefHeight="39.0" prefWidth="153.0" style="-fx-background-radius: 20;" stylesheets="@../../../../styles/buttonHover.css" text="Crear marcaje">
+        <Button fx:id="buttonCrear" layoutX="480.0" layoutY="504.0" mnemonicParsing="false" onAction="#crear" prefHeight="39.0" prefWidth="153.0" style="-fx-background-radius: 20;" styleClass="btn-confirmar" stylesheets="@../../../../styles/styles.css" text="Crear marcaje">
             <font>
                 <Font name="System Bold Italic" size="18.0" />
             </font>
